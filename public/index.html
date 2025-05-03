@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>YouTube Live Streamer</title>
+</head>
+<body>
+  <h1>YouTube Live Streamer</h1>
+
+  <form action="/stream-file" method="post" enctype="multipart/form-data">
+    <h3>Upload Video</h3>
+    <input type="file" name="video" accept="video/*" required>
+    <button type="submit">Stream Video File</button>
+  </form>
+
+  <hr>
+
+  <form action="/stream-url" method="post">
+    <h3>Stream Video from URL</h3>
+    <input type="text" name="videoUrl" placeholder="https://example.com/video.mp4" required style="width: 400px;">
+    <button type="submit">Stream Video URL</button>
+  </form>
+
+  <hr>
+
+  <form action="/stream-audio-file" method="post" enctype="multipart/form-data">
+    <h3>Upload Audio</h3>
+    <input type="file" name="audio" accept="audio/*" required>
+    <button type="submit">Stream Audio File</button>
+  </form>
+
+  <hr>
+
+  <form action="/stream-audio-url" method="post">
+    <h3>Stream Audio from URL</h3>
+    <input type="text" name="audioUrl" placeholder="https://example.com/song.mp3" required style="width: 400px;">
+    <button type="submit">Stream Audio URL</button>
+  </form>
+</body>
+</html>
