@@ -1,12 +1,24 @@
-FROM datarhei/restreamer:latest
+FROM ubuntu:20.04
 
-# Optional: Set environment variables
-ENV RS_USERNAME=admin
-ENV RS_PASSWORD=admin
-ENV TZ=Asia/Colombo
+ENV DEBIAN_FRONTEND=noninteractive
 
-# Expose necessary ports
-EXPOSE 8080 1935 8181
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    software-properties-common \
+    wget \
+    gnupg2 \
+    ca-certificates \
+    x11vnc xvfb \
+    xterm \
+    fluxbox \
+    obs-studio \
+    pulseaudio \
+    && apt-get clean
 
-# Default command
-CMD ["/restreamer"]
+# Create user
+RUN useradd -m obsuser
+USER obsuser
+WORKDIR /home/obsuser
+
+# Start OBS and VNC on container start
+CMD ["bash", "-c", "Xvfb :0 -screen 0 1920x1080x24 & x11vnc -display :0 -nopw -forever & fluxbox & obs"]
